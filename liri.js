@@ -32,7 +32,11 @@ function liri(){
     if (command === 'my-tweets'){
         client.get('statuses/user_timeline', function(err, tweets, response){
             if(err) throw err;
-            console.log(JSON.parse(tweets));
+            for (var i = 0; i < tweets.length; i++) {
+                const recentTweets = tweets[i];
+                
+                console.log(recentTweets.created_at + ': ' + recentTweets.text)
+            }
         })
     };
     if (command === 'spotify-this-song'){
