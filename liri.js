@@ -28,10 +28,13 @@ function liri(){
                 console.log("Actors: " + JSON.parse(body).Actors);
             }
         })
-    }
+    };
     if (command === 'my-tweets'){
 
-    }
+    };
+    if (command === 'spotify-this-song'){
+
+    };
 }
 
 console.log (client)
