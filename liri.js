@@ -3,7 +3,7 @@ const request = require("request");
 const keys = require('./keys.js');
 const Twitter = require('twitter');
 const Spotify = require('node-spotify-api')
-
+const fs = require("fs")
 
 
 var spotify = new Spotify(keys.spotify);
@@ -31,7 +31,7 @@ function liri(){
     };
     if (command === 'my-tweets'){
         client.get('statuses/user_timeline', function(err, tweets, response){
-            if(err) throw err;
+            if(err) {console.log(err)};
             for (var i = 0; i < tweets.length; i++) {
                 const recentTweets = tweets[i];
                 
@@ -50,6 +50,16 @@ function liri(){
             console.log(data.tracks.items[0].external_urls.spotify)
           });
     };
+    if (command === 'do-what-it-says'){
+        fs.readFile('random.txt', 'utf8', function(err, data){
+            if (err){
+               return console.log('Error occurred: ' + err)};
+            var fileData = data.split(',')
+            command = fileData[0];
+            thing = fileData[1];
+            liri()        
+        })
+    }
 }
 
 
