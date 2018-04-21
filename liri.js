@@ -30,13 +30,23 @@ function liri(){
         })
     };
     if (command === 'my-tweets'){
-
+        client.get('statuses/user_timeline', function(err, tweets, response){
+            if(err) throw err;
+            console.log(JSON.parse(tweets));
+        })
     };
     if (command === 'spotify-this-song'){
-
+        spotify.search({ type: 'track', query: thing }, function(err, data) {
+            if (err) {
+              return console.log('Error occurred: ' + err);
+            }
+            console.log('Artists: ' + data.tracks.items[0].album.artists[0].name )
+            console.log('Album: ' + data.tracks.items[0].album.name ); 
+            console.log('Song Title: ' + data.tracks.items[0].name)
+            console.log(data.tracks.items[0].external_urls.spotify)
+          });
     };
 }
 
-console.log (client)
 
 liri()
